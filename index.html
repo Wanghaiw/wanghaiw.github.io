@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+					{% block main %}
+                        {% for article in article_list %}
+						<article class="post post-1">
+							<header class="entry-header">
+								<h1 class="entry-title">
+{#									<a href="">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>#}
+                                    <a href="{% url 'details' article.id %}">{{ article.title }}</a>
+                                </h1>
+								<div class="entry-meta">
+                                        <span class="post-category">
+                                          <a href="#">{{ article.category.name }} </a>
+                                        </span>
+
+                                        <span class="post-date">
+                                          <a href="#">
+                                            <time class="entry-date" datetime="{{ article.created_time }}">{{ article.created_time }}         </time>
+                                          </a>
+                                        </span>
+
+                                        <span class="post-author"><a href="#">{{ article.author }} </a></span>
+
+                                        <span class="comments-link"><a href="#">{{ article.comment_set.all.count }} Comments</a></span>
+
+								</div>
+							</header>
+							<div class="entry-content clearfix">
+								<p>{{ article.excerpt }}</p>
+								<div class="read-more cl-effect-14">
+									<a href="{% url 'details' article.id %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+								</div>
+							</div>
+						</article>
+                        {% empty %}
+                        <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    {% endblock %}
+
